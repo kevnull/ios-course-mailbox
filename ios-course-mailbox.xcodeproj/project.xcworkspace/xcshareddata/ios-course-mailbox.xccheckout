@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D4BC7849-E397-459C-A9F6-277E1FE48D74</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ios-course-mailbox</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>68667DCD72896416EB55EC4DB746D690A1B2E216</key>
+		<string>https://github.com/kevnull/ios-course-mailbox.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ios-course-mailbox.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>68667DCD72896416EB55EC4DB746D690A1B2E216</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/kevnull/ios-course-mailbox.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>68667DCD72896416EB55EC4DB746D690A1B2E216</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>68667DCD72896416EB55EC4DB746D690A1B2E216</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ios-course-mailbox</string>
+		</dict>
+	</array>
+</dict>
+</plist>

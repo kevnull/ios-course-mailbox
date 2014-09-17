@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios-course-mailbox/MailboxViewController.swift"
-            timestampString = "432642315.313567"
+            timestampString = "432678169.587831"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "265"
-            endingLineNumber = "265"
+            startingLineNumber = "321"
+            endingLineNumber = "321"
             landmarkName = "MailboxViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios-course-mailbox/MailboxViewController.swift"
-            timestampString = "432642315.313567"
+            timestampString = "432678169.587831"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
             landmarkName = "onMessagePan(_:)"
             landmarkType = "5">
          </BreakpointContent>

@@ -51,25 +51,67 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var composeButton: UIButton!
+    @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var composeContainer: UIView!
+    @IBOutlet weak var newMessageNav: UIImageView!
+    @IBOutlet weak var screenView: UIView!
     @IBOutlet weak var helpView: UIImageView!
     @IBOutlet weak var searchView: UIImageView!
     @IBOutlet weak var feedView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var archiveScrollView: UIScrollView!
     @IBOutlet weak var messageView: UIImageView!
     @IBOutlet weak var messageContainerView: UIView!
     @IBOutlet weak var navSegment: UISegmentedControl!
     @IBOutlet weak var navView: UIImageView!
 
+    @IBAction func onCancelButton(sender: AnyObject) {
+        UIView.animateWithDuration(0.3,  animations: { () -> Void in
+            self.screenView.alpha = 0
+            self.composeContainer.frame.origin.y = 747
+            self.newMessageNav.frame.origin.x = 320
+            self.newMessageNav.alpha = 0
+            self.cancelButton.frame.origin.x = 328
+            }, completion: nil)
+        view.endEditing(true)
+        
+    }
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var toText: UITextField!
+    @IBAction func onComposeButton(sender: AnyObject) {
+        UIView.animateWithDuration(0.3,  animations: { () -> Void in
+            self.screenView.alpha = 0.6
+            self.composeContainer.frame.origin.y = 80
+            self.newMessageNav.frame.origin.x = 0
+            self.newMessageNav.alpha = 1
+            self.cancelButton.frame.origin.x = 8
+            }, completion: nil)
+        toText.becomeFirstResponder()
+    }
+    
     @IBAction func onNav(sender: AnyObject) {
         switch (navSegment.selectedSegmentIndex) {
         case 0:
             navSegment.tintColor = UIColor (rgba: "#F5CC4E")
-            navView.image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-            navView.image?.
+            composeButton.tintColor = UIColor (rgba: "#F5CC4E")
+            menuButton.tintColor = UIColor (rgba: "#F5CC4E")
         case 1:
             navSegment.tintColor = UIColor (rgba: "#5BB7D7")
+            composeButton.tintColor = UIColor (rgba: "#5BB7D7")
+            menuButton.tintColor = UIColor (rgba: "#5BB7D7")
+            UIView.animateWithDuration(0.4,  delay: 0.2, options: nil, animations: { () -> Void in
+                self.scrollView.frame.origin.x = 0
+                self.archiveScrollView.frame.origin.x = 320
+                }, completion: nil)
         case 2:
             navSegment.tintColor = UIColor (rgba: "#90D062")
+            composeButton.tintColor = UIColor (rgba: "#90D062")
+            menuButton.tintColor = UIColor (rgba: "#90D062")
+            UIView.animateWithDuration(0.4,  delay: 0.2, options: nil, animations: { () -> Void in
+                self.scrollView.frame.origin.x = -320
+                self.archiveScrollView.frame.origin.x = 0
+                }, completion: nil)
         default:
             break
         }
@@ -199,7 +241,12 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
             
             switch (x) {
             case (-320)...(-260): // drag far left (list)
-                println("list done")
+                UIView.animateWithDuration(0.4, animations: { () -> Void in
+                    self.messageView.frame.origin.x = CGFloat(0 - self.messageView.frame.size.width - self.iconView.frame.size.width - 15)
+                    self.iconView.frame.origin.x = 0 - self.iconView.frame.size.width
+                    }, completion: { (Bool) -> Void in
+                        self.performSegueWithIdentifier("listSegue", sender: self)
+                })
             case (-260)...(-60): // drag left (schedule)
                 UIView.animateWithDuration(0.4, animations: { () -> Void in
                     self.messageView.frame.origin.x = CGFloat(0 - self.messageView.frame.size.width - self.iconView.frame.size.width - 15)
@@ -244,10 +291,19 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         scrollView.delegate = self
         scrollView.contentSize.width = feedView.frame.width
         scrollView.contentSize.height = feedView.frame.height + helpView.frame.height + searchView.frame.height
         scrollView.contentOffset.y = 79
+
+        archiveScrollView.delegate = self
+        archiveScrollView.contentSize.width = feedView.frame.width
+        archiveScrollView.contentSize.height = feedView.frame.height +  searchView.frame.height
+        archiveScrollView.contentOffset.y = 42
+        archiveScrollView.frame.origin = CGPoint(x: 320, y:0)
+println(archiveScrollView.frame)
+println(archiveScrollView.contentSize)
         var edgeGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "onEdgePan:")
         edgeGesture.edges = UIRectEdge.Left
         containerView.addGestureRecognizer(edgeGesture)
