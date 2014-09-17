@@ -4,7 +4,7 @@ Assignment 3: Mailbox
 # Time Spent
 6 hours
 
-# Required Features
+## Required Features
 * On dragging the message left...
    * Initially, the revealed background color should be gray.
    * As the reschedule icon is revealed, it should start semi-transparent and become fully opaque. If released at this point, the message should return to its initial position.
@@ -22,7 +22,7 @@ Assignment 3: Mailbox
    * After 260 pts, the icon should change to the delete icon and the background color should change to red.
      * Upon release, the message should continue to reveal the red background. When the animation it complete, it should hide the message.
 
-# Optional Features
+## Optional Features
 * Menu
    * Panning from the left edge should reveal the menu
    * After 285 pts, if user lifts finger, continues to reveal menu
@@ -32,5 +32,5 @@ Assignment 3: Mailbox
    * Shows scrollview for archived messages
 * Shake to undo: only performs when there's something to undo
 
-# External libraries
+## External libraries
 * UIColor Hex https://github.com/yeahdongcn/UIColor-Hex-Swift
