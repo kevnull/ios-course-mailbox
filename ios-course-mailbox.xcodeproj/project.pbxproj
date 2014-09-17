@@ -15,7 +15,6 @@
 		88F5043C19C805F700312549 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88F5043A19C805F700312549 /* LaunchScreen.xib */; };
 		88F5044819C805F700312549 /* ios_course_mailboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F5044719C805F700312549 /* ios_course_mailboxTests.swift */; };
 		88F5045219C807ED00312549 /* MailboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F5045119C807ED00312549 /* MailboxViewController.swift */; };
-		88F5045419C80B8700312549 /* messageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F5045319C80B8700312549 /* messageContainerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +40,6 @@
 		88F5044619C805F700312549 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88F5044719C805F700312549 /* ios_course_mailboxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_course_mailboxTests.swift; sourceTree = "<group>"; };
 		88F5045119C807ED00312549 /* MailboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailboxViewController.swift; sourceTree = "<group>"; };
-		88F5045319C80B8700312549 /* messageContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = messageContainerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +63,6 @@
 		88F5042319C805F700312549 = {
 			isa = PBXGroup;
 			children = (
-				88F5045319C80B8700312549 /* messageContainerViewController.swift */,
 				88F5042E19C805F700312549 /* ios-course-mailbox */,
 				88F5044419C805F700312549 /* ios-course-mailboxTests */,
 				88F5042D19C805F700312549 /* Products */,
@@ -223,7 +220,6 @@
 			files = (
 				88F5043419C805F700312549 /* ViewController.swift in Sources */,
 				88F5043219C805F700312549 /* AppDelegate.swift in Sources */,
-				88F5045419C80B8700312549 /* messageContainerViewController.swift in Sources */,
 				887609BB19C9833700175B9D /* scheduleViewController.swift in Sources */,
 				88F5045219C807ED00312549 /* MailboxViewController.swift in Sources */,
 			);

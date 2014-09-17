@@ -163,8 +163,8 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    
-    // MARK: +Hamburger Menu
+
+    // MARK: Hamburger Menu
     
     @IBAction func onMenuButton(sender: AnyObject) {
         if (menuHidden) {

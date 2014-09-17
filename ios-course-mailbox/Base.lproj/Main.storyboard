@@ -220,9 +220,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="ap5-Nb-NeQ" appends="YES" id="YOR-4i-hxh"/>
-                                </connections>
                             </imageView>
                             <view opaque="NO" contentMode="scaleToFill" id="mvo-bk-C47">
                                 <rect key="frame" x="0.0" y="109" width="320" height="353"/>
@@ -284,9 +281,6 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="26n-SS-HJi" appends="YES" id="cWp-1f-l84"/>
-                        </connections>
                     </view>
                     <connections>
                         <segue destination="piC-Io-nF4" kind="unwind" identifier="scheduledSegue" unwindAction="unwindSegue:" id="ref-5H-6ti"/>
