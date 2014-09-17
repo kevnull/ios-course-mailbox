@@ -129,6 +129,10 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="D7N-qU-qR9" appends="YES" id="xxQ-sP-cqA"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" id="ho7-fM-e9f" userLabel="composeContainer">
                                 <rect key="frame" x="0.0" y="747" width="320" height="211"/>
@@ -176,6 +180,7 @@
                         <outlet property="helpView" destination="qke-Oa-RM2" id="vnY-MY-Af1"/>
                         <outlet property="iconView" destination="PnR-hW-qHp" id="DfW-FI-Vbb"/>
                         <outlet property="menuButton" destination="Mve-ob-mea" id="Jx8-Q9-BTp"/>
+                        <outlet property="menuOpenGestureRecognizer" destination="D7N-qU-qR9" id="rwA-gq-eG9"/>
                         <outlet property="messageContainerView" destination="VNi-rW-2gW" id="t4L-17-nW1"/>
                         <outlet property="messageView" destination="PfS-X8-hP2" id="7Jj-Tv-Tgs"/>
                         <outlet property="navSegment" destination="nXf-bn-eWV" id="1pl-v0-YU6"/>
@@ -195,6 +200,11 @@
                         <action selector="onMessagePan:" destination="vXZ-lx-hvc" id="O0u-wH-tgf"/>
                     </connections>
                 </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="D7N-qU-qR9" userLabel="menu open">
+                    <connections>
+                        <action selector="onEdgePan:" destination="vXZ-lx-hvc" id="7Ou-LK-sDs"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="162" y="406"/>
         </scene>
@@ -211,7 +221,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="ap5-Nb-NeQ" appends="YES" id="Uqp-Cc-WfO"/>
+                                    <outletCollection property="gestureRecognizers" destination="ap5-Nb-NeQ" appends="YES" id="YOR-4i-hxh"/>
                                 </connections>
                             </imageView>
                             <view opaque="NO" contentMode="scaleToFill" id="mvo-bk-C47">
@@ -219,7 +229,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="8A9-w7-pv5" appends="YES" id="kVC-cJ-s5j"/>
+                                    <outletCollection property="gestureRecognizers" destination="8A9-w7-pv5" appends="YES" id="7UE-cd-U98"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -235,7 +245,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pox-qp-ohr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="BSp-ZU-JeG" userLabel="Exit" sceneMemberID="exit"/>
-                <tapGestureRecognizer id="8A9-w7-pv5" userLabel="schedulle tap">
+                <tapGestureRecognizer id="8A9-w7-pv5" userLabel="scheduled tap">
                     <connections>
                         <action selector="scheduleTap:" destination="LFD-ya-cJu" id="ukD-nm-7Ig"/>
                     </connections>

@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Helper function to use hexvalues for UIColor
 extension UIColor {
     convenience init(rgba: String) {
         var red: CGFloat   = 0.0
@@ -49,36 +50,46 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
     var menuHidden : Bool = true
     var canUndo : Bool = false
     
-    @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var containerView: UIView!
+    // Compose related controls
     @IBOutlet weak var composeButton: UIButton!
-    @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var composeContainer: UIView!
-    @IBOutlet weak var newMessageNav: UIImageView!
     @IBOutlet weak var screenView: UIView!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var toText: UITextField!
+
+    // Main area controls
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var helpView: UIImageView!
     @IBOutlet weak var searchView: UIImageView!
     @IBOutlet weak var feedView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var archiveScrollView: UIScrollView!
-    @IBOutlet weak var messageView: UIImageView!
-    @IBOutlet weak var messageContainerView: UIView!
+
+    // Navigation controls
     @IBOutlet weak var navSegment: UISegmentedControl!
     @IBOutlet weak var navView: UIImageView!
+    @IBOutlet weak var newMessageNav: UIImageView!
+    @IBOutlet weak var menuButton: UIButton!
 
-    @IBAction func onCancelButton(sender: AnyObject) {
-        UIView.animateWithDuration(0.3,  animations: { () -> Void in
-            self.screenView.alpha = 0
-            self.composeContainer.frame.origin.y = 747
-            self.newMessageNav.frame.origin.x = 320
-            self.newMessageNav.alpha = 0
-            self.cancelButton.frame.origin.x = 328
-            }, completion: nil)
-        view.endEditing(true)
-        
+    // Individual message controls
+    @IBOutlet weak var iconView: UIImageView!
+    @IBOutlet weak var messageView: UIImageView!
+    @IBOutlet weak var messageContainerView: UIView!
+
+    // Archive view controls
+    @IBOutlet weak var archiveScrollView: UIScrollView!
+
+    @IBOutlet var menuOpenGestureRecognizer: UIPanGestureRecognizer!
+    
+
+    // Helper function. Given scale of x to y, find where value fits on scale of a to b
+    func transformValue (value : Float, x : Float, y : Float, a : Float, b: Float) -> Float {
+        return (value/(y-x)*(b-a))+a
     }
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var toText: UITextField!
+
+    
+    // MARK: Compose
+    
+    // Enables compose message stuff
     @IBAction func onComposeButton(sender: AnyObject) {
         UIView.animateWithDuration(0.3,  animations: { () -> Void in
             self.screenView.alpha = 0.6
@@ -90,6 +101,21 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
         toText.becomeFirstResponder()
     }
     
+    // Dismisses compose message stuff
+    @IBAction func onCancelButton(sender: AnyObject) {
+        UIView.animateWithDuration(0.3,  animations: { () -> Void in
+            self.screenView.alpha = 0
+            self.composeContainer.frame.origin.y = 747
+            self.newMessageNav.frame.origin.x = 320
+            self.newMessageNav.alpha = 0
+            self.cancelButton.frame.origin.x = 328
+            }, completion: nil)
+        view.endEditing(true)
+        
+    }
+    
+    
+    // MARK: Navigation
     @IBAction func onNav(sender: AnyObject) {
         switch (navSegment.selectedSegmentIndex) {
         case 0:
@@ -117,14 +143,18 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
         }
     }
 
+    // Deals with what to do with the message when it gets back from Schedule or List views
     @IBAction func unwindSegue(segue: UIStoryboardSegue) {
-    //do stuff
+        
+        // Remove line item
         if (segue.identifier == "scheduledSegue") {
             UIView.animateWithDuration(0.4,  delay: 0.2, options: nil, animations: { () -> Void in
                 self.messageContainerView.frame.origin.y -= self.messageView.frame.size.height
                 self.feedView.frame.origin.y -= self.messageView.frame.size.height
                 }, completion: nil)
             canUndo = true
+            
+        // Don't remove line item, bring message back
         } else if (segue.identifier == "dismissScheduleSegue") {
             UIView.animateWithDuration(0.4, animations: { () -> Void in
                 self.messageView.frame.origin.x = 0
@@ -132,66 +162,76 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
                 }, completion: nil)
         }
     }
-
-    // given scale of x to y, find where value fits on scale of a to b
-    func transformValue (value : Float, x : Float, y : Float, a : Float, b: Float) -> Float {
-        return (value/(y-x)*(b-a))+a
-    }
-   
+    
+    
+    // MARK: +Hamburger Menu
+    
     @IBAction func onMenuButton(sender: AnyObject) {
         if (menuHidden) {
             UIView.animateWithDuration(0.4, animations: { () -> Void in
                 self.containerView.frame.origin.x = 285
                 }, completion: nil)
             menuHidden = false
+            scrollView.userInteractionEnabled = false
+            menuOpenGestureRecognizer.enabled = true
         } else {
             UIView.animateWithDuration(0.4, animations: { () -> Void in
                 self.containerView.frame.origin.x = 0
                 }, completion: nil)
             menuHidden = true
+            scrollView.userInteractionEnabled = true
+            menuOpenGestureRecognizer.enabled = false
         }
     }
     
-    @IBAction func onEdgePan(gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
+    @IBAction func onEdgePan(gestureRecognizer: UIPanGestureRecognizer) {
         var translation = gestureRecognizer.translationInView(view)
-        var edgeGesture = UIScreenEdgePanGestureRecognizer(target: view, action: "onEdgePan:")
 
+        // set where container was
         if (gestureRecognizer.state == UIGestureRecognizerState.Began) {
             originalCenter = containerView.center
+            
+        // move container with drag
         } else if (gestureRecognizer.state == UIGestureRecognizerState.Changed) {
-            println("got here \(menuHidden)")
-            if (menuHidden) {
-                containerView.center.x = originalCenter.x + translation.x
-            } else {
-                containerView.center.x = originalCenter.x - translation.x
-                println(translation.x)
-            }
+            containerView.center.x = originalCenter.x + translation.x
+
         } else if (gestureRecognizer.state == UIGestureRecognizerState.Ended) {
+            
+            // show the menu if it's past a theshold and it wasn't showing
             if (menuHidden && translation.x > 90) {
                 UIView.animateWithDuration(0.4, animations: { () -> Void in
                     self.containerView.frame.origin.x = 285
                     }, completion: nil)
                 menuHidden = false
-                edgeGesture.edges = UIRectEdge.Right
+                scrollView.userInteractionEnabled = false
+                menuOpenGestureRecognizer.enabled = true
+
+            // otherwise hide it back
             } else if (menuHidden) {
             UIView.animateWithDuration(0.4, animations: { () -> Void in
                 self.containerView.frame.origin.x = 0
                 }, completion: nil)
-            } else if (translation.x < -90) {
+
+            // if menu was showing, keep showing menu if it's under threshold
+            } else if (translation.x > -90) {
                 UIView.animateWithDuration(0.4, animations: { () -> Void in
                     self.containerView.frame.origin.x = 285
                     }, completion: nil)
+                
+            // otherwise hide the menu
             } else {
                 UIView.animateWithDuration(0.4, animations: { () -> Void in
                     self.containerView.frame.origin.x = 0
                     }, completion: nil)
                 menuHidden = true
-                edgeGesture.edges = UIRectEdge.Left
+                scrollView.userInteractionEnabled = true
+                menuOpenGestureRecognizer.enabled = false
             }
-            println(menuHidden)
         }
     }
-    
+
+    // MARK: Message Handling
+    // Handles dragging across an individual message
     @IBAction func onMessagePan(gestureRecognizer : UIPanGestureRecognizer) {
         var location = gestureRecognizer.locationInView(view)
         var translation = gestureRecognizer.translationInView(view)
@@ -199,6 +239,9 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
         
         if (gestureRecognizer.state == UIGestureRecognizerState.Began) {
             originalCenter = messageView.center
+
+            
+        // determine color under message and what icon to show
         } else if (gestureRecognizer.state == UIGestureRecognizerState.Changed) {
             
             messageView.center.x = originalCenter.x + translation.x
@@ -207,39 +250,47 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
             if (x >= 0) {
                 iconView.frame.origin.x = x - iconView.frame.size.width - 15
             } else {
-                println(x + messageView.frame.size.width + 40)
                 iconView.frame.origin.x = x + messageView.frame.size.width + 15
             }
-//            println(x)
+
             switch (x) {
             case (-320)...(-260): // drag far left (list)
                 messageContainerView.backgroundColor = UIColor (rgba: "#CBA67E")
                 iconView.image = UIImage (named: "list_icon")
+                
             case (-260)...(-60): // drag left (schedule)
                 messageContainerView.backgroundColor = UIColor (rgba: "#F5CC4E")
                 iconView.image = UIImage (named: "later_icon")
+
             case (-60)...0: // drag left slightly
                 iconView.frame.origin.x = 300 - iconView.frame.size.width
                 iconView.alpha = CGFloat(transformValue(Float(x), x: 60, y: 0, a: 0, b: 1))
                 messageContainerView.backgroundColor = UIColor (rgba: "#e5e5e5")
                 iconView.image = UIImage (named: "later_icon")
+
             case 0...60: // drag right slightly
                 iconView.frame.origin.x = 20
                 iconView.alpha = CGFloat(transformValue(Float(x), x: 0, y: 60, a: 0, b: 1))
                 messageContainerView.backgroundColor = UIColor (rgba: "#e5e5e5")
                 iconView.image = UIImage (named: "archive_icon")
+
             case 60...260: // drag right (archive)
                 messageContainerView.backgroundColor = UIColor (rgba: "#90D062")
                 iconView.image = UIImage (named: "archive_icon")
+
             case 260...320: // drag far right (delete)
                 messageContainerView.backgroundColor = UIColor (rgba: "#CD6A41")
                 iconView.image = UIImage (named: "delete_icon")
+
             default:
                 break
             }
+            
+        // check threholds to determine what action to take on message or whether to restore
         } else if (gestureRecognizer.state == UIGestureRecognizerState.Ended) {
             
             switch (x) {
+                
             case (-320)...(-260): // drag far left (list)
                 UIView.animateWithDuration(0.4, animations: { () -> Void in
                     self.messageView.frame.origin.x = CGFloat(0 - self.messageView.frame.size.width - self.iconView.frame.size.width - 15)
@@ -247,6 +298,7 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
                     }, completion: { (Bool) -> Void in
                         self.performSegueWithIdentifier("listSegue", sender: self)
                 })
+                
             case (-260)...(-60): // drag left (schedule)
                 UIView.animateWithDuration(0.4, animations: { () -> Void in
                     self.messageView.frame.origin.x = CGFloat(0 - self.messageView.frame.size.width - self.iconView.frame.size.width - 15)
@@ -254,11 +306,13 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
                     }, completion: { (Bool) -> Void in
                         self.performSegueWithIdentifier("scheduleSegue", sender: self)
                 })
+                
             case (-60)...60: // drag left or right slightly
                 UIView.animateWithDuration(0.4, animations: { () -> Void in
                     self.messageView.frame.origin.x = 0
                     self.iconView.alpha = 0
                     }, completion: nil)
+                
             case 60...320: // drag right
                 UIView.animateWithDuration(0.4, animations: { () -> Void in
                     self.messageView.frame.origin.x = CGFloat(320 + self.iconView.frame.size.width + 15)
@@ -270,12 +324,16 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
                             }, completion: nil)
                 })
                 canUndo = true
+                
             default:
                 break
             }
             
         }
     }
+
+    
+    // MARK: Undo
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
         if (canUndo) {
@@ -302,8 +360,7 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate {
         archiveScrollView.contentSize.height = feedView.frame.height +  searchView.frame.height
         archiveScrollView.contentOffset.y = 42
         archiveScrollView.frame.origin = CGPoint(x: 320, y:0)
-println(archiveScrollView.frame)
-println(archiveScrollView.contentSize)
+        
         var edgeGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "onEdgePan:")
         edgeGesture.edges = UIRectEdge.Left
         containerView.addGestureRecognizer(edgeGesture)
@@ -314,15 +371,5 @@ println(archiveScrollView.contentSize)
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
