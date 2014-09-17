@@ -2,7 +2,7 @@ Assignment 3: Mailbox
 =====================
 
 ## Time Spent
-6 hours
+7 hours
 
 ## Required Features
 * On dragging the message left...
@@ -28,8 +28,13 @@ Assignment 3: Mailbox
    * After 285 pts, if user lifts finger, continues to reveal menu
      * Otherwise it will return to left edge
 * Segmented control
-   * Tints correctly
+   * Tints correctly (with new compose and menu icons too)
    * Shows scrollview for archived messages
+* Compose
+   * compose pulls up compose screen
+   * auto-targets to field
+   * has subject and main body
+   * cancel dismisses
 * Shake to undo: only performs when there's something to undo
 
 ## External libraries
