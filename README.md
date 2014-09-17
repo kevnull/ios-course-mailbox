@@ -1,7 +1,7 @@
 Assignment 3: Mailbox
 =====================
 
-# Time Spent
+## Time Spent
 6 hours
 
 ## Required Features
