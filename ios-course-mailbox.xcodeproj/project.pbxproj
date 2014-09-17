@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		887609BB19C9833700175B9D /* scheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887609BA19C9833700175B9D /* scheduleViewController.swift */; };
 		88F5043219C805F700312549 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F5043119C805F700312549 /* AppDelegate.swift */; };
 		88F5043419C805F700312549 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F5043319C805F700312549 /* ViewController.swift */; };
 		88F5043719C805F700312549 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88F5043519C805F700312549 /* Main.storyboard */; };
 		88F5043919C805F700312549 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88F5043819C805F700312549 /* Images.xcassets */; };
 		88F5043C19C805F700312549 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88F5043A19C805F700312549 /* LaunchScreen.xib */; };
 		88F5044819C805F700312549 /* ios_course_mailboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F5044719C805F700312549 /* ios_course_mailboxTests.swift */; };
+		88F5045219C807ED00312549 /* MailboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F5045119C807ED00312549 /* MailboxViewController.swift */; };
+		88F5045419C80B8700312549 /* messageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F5045319C80B8700312549 /* messageContainerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		887609BA19C9833700175B9D /* scheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = scheduleViewController.swift; sourceTree = "<group>"; };
 		88F5042C19C805F700312549 /* ios-course-mailbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-course-mailbox.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88F5043019C805F700312549 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88F5043119C805F700312549 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +40,8 @@
 		88F5044119C805F700312549 /* ios-course-mailboxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-course-mailboxTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88F5044619C805F700312549 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88F5044719C805F700312549 /* ios_course_mailboxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_course_mailboxTests.swift; sourceTree = "<group>"; };
+		88F5045119C807ED00312549 /* MailboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailboxViewController.swift; sourceTree = "<group>"; };
+		88F5045319C80B8700312549 /* messageContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = messageContainerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +65,7 @@
 		88F5042319C805F700312549 = {
 			isa = PBXGroup;
 			children = (
+				88F5045319C80B8700312549 /* messageContainerViewController.swift */,
 				88F5042E19C805F700312549 /* ios-course-mailbox */,
 				88F5044419C805F700312549 /* ios-course-mailboxTests */,
 				88F5042D19C805F700312549 /* Products */,
@@ -80,6 +87,8 @@
 				88F5043119C805F700312549 /* AppDelegate.swift */,
 				88F5043319C805F700312549 /* ViewController.swift */,
 				88F5043519C805F700312549 /* Main.storyboard */,
+				887609BA19C9833700175B9D /* scheduleViewController.swift */,
+				88F5045119C807ED00312549 /* MailboxViewController.swift */,
 				88F5043819C805F700312549 /* Images.xcassets */,
 				88F5043A19C805F700312549 /* LaunchScreen.xib */,
 				88F5042F19C805F700312549 /* Supporting Files */,
@@ -214,6 +223,9 @@
 			files = (
 				88F5043419C805F700312549 /* ViewController.swift in Sources */,
 				88F5043219C805F700312549 /* AppDelegate.swift in Sources */,
+				88F5045419C80B8700312549 /* messageContainerViewController.swift in Sources */,
+				887609BB19C9833700175B9D /* scheduleViewController.swift in Sources */,
+				88F5045219C807ED00312549 /* MailboxViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +417,7 @@
 				88F5044D19C805F700312549 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		88F5044E19C805F700312549 /* Build configuration list for PBXNativeTarget "ios-course-mailboxTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +426,7 @@
 				88F5045019C805F700312549 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
