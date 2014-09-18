@@ -27,9 +27,13 @@ Assignment 3: Mailbox
    * Panning from the left edge should reveal the menu
    * After 285 pts, if user lifts finger, continues to reveal menu
      * Otherwise it will return to left edge
+     * Once open, can drags left to hide menu
+   * Menu button works
 * Segmented control
    * Tints correctly (with new compose and menu icons too)
    * Shows scrollview for archived messages
+* List and Schedule controls
+   * Animates differently depending on whether user performs action (hides message) or cancels out (restores message)
 * Compose
    * compose pulls up compose screen
    * auto-targets to field
