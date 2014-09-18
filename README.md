@@ -4,6 +4,8 @@ Assignment 3: Mailbox
 ## Time Spent
 7 hours
 
+<img src="https://raw.githubusercontent.com/kevnull/ios-course-mailbox/master/mailbox.gif/>
+
 ## Required Features
 * On dragging the message left...
    * Initially, the revealed background color should be gray.
